@@ -6,7 +6,7 @@
 
 <style>
     body {
-        padding: 40px;
+        padding: 80px 40px 40px;
     }
 
     textarea {
@@ -16,17 +16,31 @@
     .input-group {
     	margin: 0 0 20px;
     }
+
+    .navbar {
+        background: black;
+    }
+
+    .navbar a {
+        color: white;
+    }
 </style>
 </head>
 <body>
 
+<nav class="navbar navbar-fixed-top navbar-dark">
+  <a class="navbar-brand" href="/">Extractor</a>
+  <a class="navbar-brand" href="history.php">History</a>
+</nav>
+
 <?php if($_GET['i']) : ?>
-    <h1>Here is your data:</h1>
+    <div class="input-group">
+        <a href="<?php echo $_GET['i']; ?>.zip" class="btn btn-primary" role="button">Download Data</a>
+    </div>
 
-   <div class="input-group"> <span class="input-group-addon">Filter</span>
-
-    <input id="filter" type="text" class="form-control" placeholder="Type here...">
-</div>
+    <div class="input-group"> <span class="input-group-addon">Filter</span>
+        <input id="filter" type="text" class="form-control" placeholder="Type here...">
+    </div>
 
 <?php
 echo '<table class="table table-hover" data-toggle="table">';

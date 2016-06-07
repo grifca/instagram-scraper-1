@@ -5,15 +5,32 @@
 
 <style>
     body {
-        padding: 40px;
+        padding: 80px 40px 40px;
     }
 
     textarea {
         margin: 0 0 20px;
     }
+
+    .input-group {
+        margin: 0 0 20px;
+    }
+
+    .navbar {
+        background: black;
+    }
+
+    .navbar a {
+        color: white;
+    }
 </style>
 </head>
 <body>
+
+<nav class="navbar navbar-fixed-top navbar-dark">
+  <a class="navbar-brand" href="/">Extractor</a>
+  <a class="navbar-brand" href="history.php">History</a>
+</nav>
 
 <?php if($_GET['success']) : ?>
     <?php
