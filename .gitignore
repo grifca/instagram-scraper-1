@@ -1,0 +1,6 @@
+build/
+.svn/
+application/
+docs/
+scripts/
+sql/
