@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"> 
 
 <style>
     body {
@@ -33,21 +33,28 @@
 </nav>
 
 <?php if($_GET['success']) : ?>
-    <?php
-    // $identifier = $_GET['success'];
-
-    // header("Content-type: application/zip"); 
-    // header("Content-Disposition: attachment; filename=".$identifier.".zip"); 
-    // header("Pragma: no-cache"); 
-    // header("Expires: 0"); 
-    // readfile($identifier.".zip", "output");
-    ?>
 
 <?php else : ?>
+    <?php
+    $max_file_size = 10485760; // size in bytes 
+    ?>
 
     <form method="post" action="script.php">
         <textarea class="form-control" name="htmlinput" id="htmlinput" cols="30" rows="10"></textarea>
         <a href="javascript:void(0)" class="btn btn-primary" id="example">Load Example</a>
+        <button type="submit" class="btn btn-success">Scrape</button>
+    </form>
+
+    <hr>
+
+    <form method="post" action="upload.php" enctype="multipart/form-data">
+        <fieldset class="form-group">
+            <label class="file">
+                <input type="hidden" name="MAX_FILE_SIZE" id="MAX_FILE_SIZE" value="<?php echo $max_file_size ?>"> 
+                <input type="file" id="files" name="files" accept="text/plain">
+                <span class="file-custom"></span>
+            </label>
+        </fieldset>
         <button type="submit" class="btn btn-success">Scrape</button>
     </form>
 
