@@ -62,7 +62,7 @@ if(isset($_GET['i'])) {
 	// arsort($matchCategories);
 
 
-
+	arsort($matchCategories);
 
 	foreach ( $matchCategories as $key => $cat ) {
 		fputcsv($reportFile, array($key, $cat));

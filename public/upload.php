@@ -2,7 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"> 
-<link rel="stylesheet" href="font-awesome.min.css"> 
+<link rel="stylesheet" href="assets/fonts/font-awesome.min.css"> 
 
 <style>
     body {
@@ -118,7 +118,7 @@ if($_FILES['files'])
       <i class="fa fa-spinner spinner" aria-hidden="true"></i>
       <i class="fa fa-check" aria-hidden="true"></i>
       <strong>Instagram Extraction</strong> 
-      This will extract all Instagram posts into a CSV file 
+      This will extract all Instagram posts into a CSV file (this may take a minute for large files)
   </div>
 
 
@@ -282,7 +282,7 @@ function enableButton() {
 
 function downloadReport() {
   if($('#download-report').prop('disabled') == false) {
-    alert('test');
+    // alert('test');
     location.href=identifier+'.zip';
   }
 }
