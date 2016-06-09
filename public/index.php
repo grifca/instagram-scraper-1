@@ -36,16 +36,16 @@
 
 <?php else : ?>
     <?php
-    $max_file_size = 10485760; // size in bytes 
+    $max_file_size = 30000000; // size in bytes 
     ?>
 
-    <form method="post" action="script.php">
+<!--     <form method="post" action="script.php">
         <textarea class="form-control" name="htmlinput" id="htmlinput" cols="30" rows="10"></textarea>
         <a href="javascript:void(0)" class="btn btn-primary" id="example">Load Example</a>
         <button type="submit" class="btn btn-success">Scrape</button>
     </form>
 
-    <hr>
+    <hr> -->
 
     <form method="post" action="upload.php" enctype="multipart/form-data">
         <fieldset class="form-group">

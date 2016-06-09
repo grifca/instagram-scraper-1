@@ -1,0 +1,42 @@
+<?php
+
+set_time_limit(3000);
+
+if(isset($_GET['i'])) {
+	$identifier = $_GET['i'];
+
+	$dirname = 'output/'.$identifier;
+
+
+	$rootPath = realpath($dirname);
+
+	// Initialize archive object
+	$zip = new ZipArchive();
+	$zip->open($identifier.'.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+	// Create recursive directory iterator
+	/** @var SplFileInfo[] $files */
+	$files = new RecursiveIteratorIterator(
+	    new RecursiveDirectoryIterator($rootPath),
+	    RecursiveIteratorIterator::LEAVES_ONLY
+	);
+
+	foreach ($files as $name => $file)
+	{
+	    // Skip directories (they would be added automatically)
+	    if (!$file->isDir())
+	    {
+	        // Get real and relative path for current file
+	        $filePath = $file->getRealPath();
+	        $relativePath = substr($filePath, strlen($rootPath) + 1);
+
+	        // Add current file to archive
+	        $zip->addFile($filePath, $relativePath);
+	    }
+	}
+
+	// Zip archive will be created only after closing object
+	$zip->close();
+
+}
+?>

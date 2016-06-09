@@ -14,7 +14,7 @@ if($form) {
 
 	$dirname = 'output/'.$identifier;
 
-	mkdir($dirname, 0755, true);
+	mkdir($dirname, 0777, true);
 
 	$html = '<!DOCTYPE html><html><head></head><body>'.$form.'</body></html>';
 
