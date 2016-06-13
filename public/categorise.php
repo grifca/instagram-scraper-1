@@ -58,7 +58,7 @@ if(isset($_GET['i'])) {
 	fclose($file);
 
 
-	$reportFile = fopen('output/'. $identifier . '/report_'. $identifier . '.csv','w');
+	$reportFile = fopen('output/'. $identifier . '/reports/report_'. $identifier . '.csv','w');
 	// arsort($matchCategories);
 
 

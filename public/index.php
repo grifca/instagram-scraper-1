@@ -29,7 +29,7 @@
 
 <nav class="navbar navbar-fixed-top navbar-dark">
   <a class="navbar-brand" href="/">Extractor</a>
-  <a class="navbar-brand" href="history.php">History</a>
+  <a class="navbar-brand" href="datasets.php">Datasets</a>
 </nav>
 
 <?php if($_GET['success']) : ?>
@@ -39,13 +39,14 @@
     $max_file_size = 30000000; // size in bytes 
     ?>
 
-<!--     <form method="post" action="script.php">
+    <!--
+    <form method="post" action="script.php">
         <textarea class="form-control" name="htmlinput" id="htmlinput" cols="30" rows="10"></textarea>
         <a href="javascript:void(0)" class="btn btn-primary" id="example">Load Example</a>
         <button type="submit" class="btn btn-success">Scrape</button>
     </form>
-
-    <hr> -->
+    <hr> 
+    -->
 
     <form method="post" action="upload.php" enctype="multipart/form-data">
         <fieldset class="form-group">
@@ -54,6 +55,24 @@
                 <input type="file" id="files" name="files" accept="text/plain">
                 <span class="file-custom"></span>
             </label>
+        </fieldset>
+        <fieldset class="form-group">
+
+        <?php 
+        $outputs = glob('matches/*'); 
+
+        if($outputs) {
+
+            echo '<div class="list-group">';
+
+            foreach($outputs as $dir => $identifier) {
+                $identifier = ltrim($identifier, 'output/');
+                echo '<div class="list-group-item"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">'.$identifier.'</div>';
+            }
+
+            echo '</div>';
+        }
+        ?>
         </fieldset>
         <button type="submit" class="btn btn-success">Scrape</button>
     </form>
