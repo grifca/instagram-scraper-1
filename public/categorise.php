@@ -45,7 +45,7 @@ if(isset($_GET['i'])) {
 
 		foreach ( $matchArray as $key => $matchGroup ) {
 			foreach ( $matchGroup as $key => $match ) {
-				if($match == $hashtag) {
+				if(strtolower($match) == $hashtag) {
 					$existingTally = $matchCategories[$matchGroup[0]];
 					$matchCategories[$matchGroup[0]] = $existingTally + $hashtagCount;
 				}
@@ -58,6 +58,7 @@ if(isset($_GET['i'])) {
 	fclose($file);
 
 
+	mkdir('output/'. $identifier . '/reports/', 0777, true);
 	$reportFile = fopen('output/'. $identifier . '/reports/report_'. $identifier . '.csv','w');
 	// arsort($matchCategories);
 
