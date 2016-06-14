@@ -67,7 +67,7 @@
 
             foreach($outputs as $dir => $identifier) {
                 $identifier = ltrim($identifier, 'output/');
-                echo '<div class="list-group-item"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">'.$identifier.'</div>';
+                echo '<div class="list-group-item"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" style="margin-right: 10px;">'.$identifier.'</div>';
             }
 
             echo '</div>';

@@ -32,10 +32,16 @@
 <nav class="navbar navbar-fixed-top navbar-dark">
   <a class="navbar-brand" href="/">Extractor</a>
   <a class="navbar-brand" href="datasets.php">Datasets</a>
+  <a class="navbar-brand" href="matches.php">Matches</a>
 </nav>
 
 <?php if($_GET['i']) : ?>
-        <a href="<?php echo $_GET['i']; ?>.zip" class="btn btn-primary pull-xs-right" role="button">Download Data</a>
+
+    <div class="btn-group pull-xs-right" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-secondary">View Images</button>
+      <button type="button" class="btn btn-secondary" rel="<?php echo $_GET['i']; ?>" id="download-btn">Download Data</button>
+    </div>
+
     <div class="input-group">
         <div class="btn-group">
           <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</button>
@@ -67,7 +73,7 @@ echo '<table class="table table-hover" data-toggle="table">';
 $f = fopen("output/".$_GET['i']."/reports/report_".$_GET['i'].".csv", "r");
 $rowcount = 0;
 while (($line = fgetcsv($f)) !== false) {
-	if($rowcount == -1) {
+	if($rowcount == 0) {
 		echo '<thead><tr>';
 
 		foreach ($line as $cell) {
@@ -135,6 +141,10 @@ echo "</tbody></table>";
         })
 
     }(jQuery));
+
+    $('#download-btn').click(function() {
+        window.location.href = $(this).attr('rel');
+    });
 
 // document.onkeypress = function (e) {
 //     e = e || window.event;

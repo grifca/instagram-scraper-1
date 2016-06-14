@@ -13,21 +13,26 @@ if(isset($_GET['i'])) {
 	$rowCount = 0;
 
 	while (($matchrow = fgetcsv($matches, 0, ",")) !== FALSE) {
-	    var_dump($matchrow);
+	    // var_dump($matchrow);
 
 	    foreach ($matchrow as $key => $match) {
 	    	if($rowCount == 0) {
-	    		$matchArray[] = array();
+	    		$matchArray[$match] = array();
 	    		$matchCategories[$match] = 0;
+	    	} else {
+	    		$cityNames = array_keys($matchArray);
+					$city = $cityNames[$key];
+	    		$matchArray[$city][] = $match;
 	    	}
 	    	
-    		$matchArray[$key][] = $match;
+    		
 	    }
 
 	    $rowCount++;
 	}
 
-	var_dump($matchArray);
+	// var_dump($matchArray);
+
 
 	fclose($matches);
 
@@ -39,15 +44,22 @@ if(isset($_GET['i'])) {
 	    // var_dump($row);
 	    // $hashtags = array_count_values($row);
 	    // var_dump($hashtagCounts);
-	    $hashtag = $row[0];
-	    $hashtagCount = $row[1];
+    $hashtag = $row[0];
+    $hashtagCount = $row[1];
 			// var_dump($hashtag);
 
-		foreach ( $matchArray as $key => $matchGroup ) {
-			foreach ( $matchGroup as $key => $match ) {
+		foreach ( $matchArray as $groupKey => $matchGroup ) {
+			// var_dump($matchGroup);
+			foreach ( $matchGroup as $matchKey => $match ) {
 				if(strtolower($match) == $hashtag) {
-					$existingTally = $matchCategories[$matchGroup[0]];
-					$matchCategories[$matchGroup[0]] = $existingTally + $hashtagCount;
+					var_dump($match);
+					var_dump($hashtag);
+					var_dump($groupKey);
+					$existingTally = $matchCategories[$groupKey];
+					var_dump($existingTally);
+					var_dump($hashtagCount);
+					$matchCategories[$groupKey] = $existingTally + $hashtagCount;
+					var_dump($matchCategories[$groupKey]);
 				}
 				else {
 				}
@@ -55,15 +67,18 @@ if(isset($_GET['i'])) {
 		}
 	}
 
+
 	fclose($file);
 
 
 	mkdir('output/'. $identifier . '/reports/', 0777, true);
 	$reportFile = fopen('output/'. $identifier . '/reports/report_'. $identifier . '.csv','w');
+	fputcsv($reportFile, array('Match Group', 'Count'));
 	// arsort($matchCategories);
 
 
 	arsort($matchCategories);
+	var_dump($matchCategories);
 
 	foreach ( $matchCategories as $key => $cat ) {
 		fputcsv($reportFile, array($key, $cat));
