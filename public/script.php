@@ -8,7 +8,7 @@ if(isset($_POST['htmlinput'])) {
   $form = file_get_contents('uploads/'.$_GET['file']);
 }
 
-var_dump($form);
+// var_dump($form);
 
 if($form) {
 

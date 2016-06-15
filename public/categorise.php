@@ -82,7 +82,7 @@ if(isset($_GET['i'])) {
 
 
 	mkdir('reports/'. $identifier, 0777, true);
-	$reportFile = fopen('reports/'. $identifier . '/report_'. urldecode($_GET['m']) . '.csv','w');
+	$reportFile = fopen('reports/'. $identifier . '/report_'. urldecode($_GET['m']),'w');
 	fputcsv($reportFile, array('Match Group', 'Count'));
 	// arsort($matchCategories);
 

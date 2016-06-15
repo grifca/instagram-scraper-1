@@ -11,7 +11,6 @@ if(isset($_GET['i'])) {
 
 	while (($row = fgetcsv($file, 0, ",")) !== FALSE) {
 	    //Dump out the row for the sake of clarity.
-	    var_dump($row[1]);
 		$hashtags = array();
 		preg_match_all("/#(\\w+)/", $row[1], $hashtags);					
 
