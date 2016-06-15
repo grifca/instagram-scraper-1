@@ -8,11 +8,13 @@ if(isset($_POST['htmlinput'])) {
   $form = file_get_contents('uploads/'.$_GET['file']);
 }
 
+var_dump($form);
+
 if($form) {
 
 	$identifier = date("m-d-Y_His");
 
-	$dirname = 'output/'.$identifier;
+	$dirname = 'datasets/'.$identifier;
 
 	mkdir($dirname, 0777, true);
 
@@ -23,7 +25,7 @@ if($form) {
 
 	$tags = $doc->getElementsByTagName('a');
 
-	$file = fopen('output/'. $identifier . '/scrape_'. $identifier . '.csv', 'w');
+	$file = fopen('datasets/'. $identifier . '/scrape_'. $identifier . '.csv', 'w');
 	 
 	fputcsv($file, array('ID', 'Caption'));
 
@@ -49,7 +51,6 @@ if($form) {
 	}
 
 	fclose($file);
-	// fclose($hashtagFile);
 
 	echo $identifier;
 } else {

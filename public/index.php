@@ -30,6 +30,8 @@
 <nav class="navbar navbar-fixed-top navbar-dark">
   <a class="navbar-brand" href="/">Extractor</a>
   <a class="navbar-brand" href="datasets.php">Datasets</a>
+  <a class="navbar-brand" href="matches.php">Matches</a>
+  <a class="navbar-brand" href="reports.php">Reports</a>
 </nav>
 
 <?php if($_GET['success']) : ?>
@@ -50,13 +52,21 @@
 
     <form method="post" action="upload.php" enctype="multipart/form-data">
         <fieldset class="form-group">
+            <label for="dataname">Dataset Name</label>
+            <input type="text" id="dataname" name="dataname" class="form-control" required>
+        </fieldset>
+        <hr>
+        <fieldset class="form-group">
+            <label for="dataname">Dataset File</label><br>
             <label class="file">
                 <input type="hidden" name="MAX_FILE_SIZE" id="MAX_FILE_SIZE" value="<?php echo $max_file_size ?>"> 
-                <input type="file" id="files" name="files" accept="text/plain">
+                <input type="file" id="files" name="files" accept="text/plain" required>
                 <span class="file-custom"></span>
             </label>
         </fieldset>
+        <hr>
         <fieldset class="form-group">
+        <label>Match List Comparison</label>
 
         <?php 
         $outputs = glob('matches/*'); 
@@ -66,8 +76,10 @@
             echo '<div class="list-group">';
 
             foreach($outputs as $dir => $identifier) {
-                $identifier = ltrim($identifier, 'output/');
-                echo '<div class="list-group-item"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" style="margin-right: 10px;">'.$identifier.'</div>';
+                // var_dump($identifier);
+                $identifier = substr($identifier, 8);
+                
+                echo '<div class="list-group-item"><input type="radio" name="matchid" id="matchid" value="'.$identifier.'" style="margin-right: 10px;" required>'.ucwords($identifier).'</div>';
             }
 
             echo '</div>';

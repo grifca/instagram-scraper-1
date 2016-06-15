@@ -32,19 +32,20 @@
   <a class="navbar-brand" href="/">Extractor</a>
   <a class="navbar-brand" href="datasets.php">Datasets</a>
   <a class="navbar-brand" href="matches.php">Matches</a>
+  <a class="navbar-brand" href="reports.php">Reports</a>
 </nav>
 
 <?php 
 
-$outputs = glob('output/*'); 
+$outputs = glob('datasets/*'); 
 
 if($outputs) {
 
     echo '<div class="list-group">';
 
     foreach($outputs as $dir => $identifier) {
-        $identifier = ltrim($identifier, 'output/');
-        echo '<a href="view.php?i='.$identifier.'" class="list-group-item">'.$identifier.'</a>';
+        $identifier = ltrim($identifier, 'datasets/');
+        echo '<a href="view-dataset.php?i='.$identifier.'" class="list-group-item">'.$identifier.'</a>';
     }
 
     echo '</div>';

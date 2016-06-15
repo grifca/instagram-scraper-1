@@ -7,7 +7,7 @@ if(isset($_GET['i'])) {
 	$identifier = $_GET['i'];
 
 
-	$file = fopen('output/'. $identifier . '/hashtags_'. $identifier . '.csv','r');
+	$file = fopen('hashtags/'. $identifier . '/hashtags_'. $identifier . '.csv','r');
 
 	while (($row = fgetcsv($file, 0, ",")) !== FALSE) {
 	    // var_dump($row);
@@ -18,7 +18,7 @@ if(isset($_GET['i'])) {
 	fclose($file);
 
 
-	$hashtagFile = fopen('output/'. $identifier . '/hashtag-counts_'. $identifier . '.csv','w');
+	$hashtagFile = fopen('hashtags/'. $identifier . '/hashtag-counts_'. $identifier . '.csv','w');
 
 
 	arsort($hashtagCounts);

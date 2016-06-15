@@ -60,6 +60,8 @@
 <nav class="navbar navbar-fixed-top navbar-dark">
   <a class="navbar-brand" href="/">Extractor</a>
   <a class="navbar-brand" href="datasets.php">Datasets</a>
+  <a class="navbar-brand" href="matches.php">Matches</a>
+  <a class="navbar-brand" href="reports.php">Reports</a>
 </nav>
 
 <?php
@@ -67,9 +69,12 @@
 // var_dump($_POST);
 // var_dump($_FILES);
 $max_size = $_POST['MAX_FILE_SIZE'];
+$match_id = $_POST['matchid'];
+$dataname = $_POST['dataname'];
 $message = 'default';
 $valid_file = true;
 
+// var_dump($match_id);
 
 if($_FILES['files'])
 {
@@ -77,7 +82,7 @@ if($_FILES['files'])
   if(!$_FILES['files']['error'])
   {
     //now is the time to modify the future file name and validate the file
-    $new_file_name = strtolower($_FILES['files']['tmp_name']); //rename file
+    $new_file_name = $dataname.'.txt'; //rename file
     if($_FILES['files']['size'] > ($max_size)) //can't be larger than 1 MB
     {
       $valid_file = false;
@@ -88,7 +93,7 @@ if($_FILES['files'])
     if($valid_file)
     {
       $fileContents = file_get_contents($_FILES['files']['tmp_name']);
-      file_put_contents('uploads/'.$_FILES['files']['name'], $fileContents);
+      file_put_contents('uploads/'.$new_file_name, $fileContents);
       $message = 'Congratulations!  Your file was accepted.';
       $state = 'success';
     }
@@ -191,7 +196,7 @@ function breakdownFile() {
   $('#alert-extraction').addClass('alert-info');
 
   $.ajax({
-    url: "script.php?file=<?php echo $_FILES['files']['name']; ?>", //Relative or absolute path to response.php file
+    url: "script.php?file=<?php echo $new_file_name; ?>", //Relative or absolute path to response.php file
     success: function(data) {
       console.log(data);
 
@@ -246,7 +251,7 @@ function collateHashtags() {
 function categoriseHashtags() {
   $('#alert-hashtag-categorise').addClass('alert-info');
   $.ajax({
-    url: "categorise.php?i="+identifier, //Relative or absolute path to response.php file
+    url: "categorise.php?i="+identifier+"&m=<?php echo urlencode($match_id); ?>", //Relative or absolute path to response.php file
     success: function(data) {
       console.log(data);
 

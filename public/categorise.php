@@ -8,7 +8,17 @@ if(isset($_GET['i'])) {
 	$matchArray = array();
 	$matchCategories = array();
 
-	$matches = fopen('matches.csv','r');
+	if(isset($_GET['m'])) {
+		$matchDir = 'matches/'.urldecode($_GET['m']);
+		$matches = fopen($matchDir,'r');
+	} else {
+		$matches = fopen('matches.csv','r');
+	}
+
+	// var_dump(urldecode($_GET['m']));
+	// var_dump($matchDir);
+	// var_dump($matches);
+	
 
 	$rowCount = 0;
 
@@ -38,7 +48,7 @@ if(isset($_GET['i'])) {
 
 
 
-	$file = fopen('output/'. $identifier . '/hashtag-counts_'. $identifier . '.csv','r');
+	$file = fopen('hashtags/'. $identifier . '/hashtag-counts_'. $identifier . '.csv','r');
 
 	while (($row = fgetcsv($file, 0, ",")) !== FALSE) {
 	    // var_dump($row);
@@ -71,8 +81,8 @@ if(isset($_GET['i'])) {
 	fclose($file);
 
 
-	mkdir('output/'. $identifier . '/reports/', 0777, true);
-	$reportFile = fopen('output/'. $identifier . '/reports/report_'. $identifier . '.csv','w');
+	mkdir('reports/'. $identifier, 0777, true);
+	$reportFile = fopen('reports/'. $identifier . '/report_'. urldecode($_GET['m']) . '.csv','w');
 	fputcsv($reportFile, array('Match Group', 'Count'));
 	// arsort($matchCategories);
 

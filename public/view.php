@@ -33,6 +33,7 @@
   <a class="navbar-brand" href="/">Extractor</a>
   <a class="navbar-brand" href="datasets.php">Datasets</a>
   <a class="navbar-brand" href="matches.php">Matches</a>
+  <a class="navbar-brand" href="reports.php">Reports</a>
 </nav>
 
 <?php if($_GET['i']) : ?>
